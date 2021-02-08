@@ -71,15 +71,15 @@ func (ctr *Collector) ValidateRequest(task v1.Task) error {
 		return errors.New(ErrIncorrectTaskFields)
 	}
 
-	//err := ctr.ValidateRequestTimeFields(task.LastUpdateTime, "lastUpdateTime")
-	//if err != nil {
-	//	return err
-	//}
-	//
-	//err = ctr.ValidateRequestTimeFields(task.ScheduledTime, "scheduledTime")
-	//if err != nil {
-	//	return err
-	//}
+	err := ctr.ValidateRequestTimeFields(task.LastUpdateTime, "lastUpdateTime")
+	if err != nil {
+		return err
+	}
+	
+	err = ctr.ValidateRequestTimeFields(task.ScheduledTime, "scheduledTime")
+	if err != nil {
+		return err
+	}
 
 	if task.Periodicity < 0 {
 		ctr.logger.Fatal(
