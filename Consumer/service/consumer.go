@@ -93,7 +93,7 @@ func (csc *ConsumerService) WriteData(task v1.Task) bool {
 	}
 	reqBodyBytes := new(bytes.Buffer)
 	json.NewEncoder(reqBodyBytes).Encode(value)
-	err := csc.Redis.Set(ctx, key, reqBodyBytes.Bytes() , 2* time.Millisecond).Err()
+	err := csc.Redis.Set(ctx, key, reqBodyBytes.Bytes() , 0).Err()
 	if err != nil {
 		return false
 	}
