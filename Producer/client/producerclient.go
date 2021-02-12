@@ -35,9 +35,9 @@ func ProducerClient() {
 		reqBodyBytes := new(bytes.Buffer)
 		task := BuildRandomRequest(count)
 		json.NewEncoder(reqBodyBytes).Encode(task)
-		consumer := GetValueFromEnvVariable("PRODUCER_URL", "http://localhost:9090")
-		consumerEndPoint := "/tasks/produce"
-		request, err := http.NewRequest("POST", consumer+consumerEndPoint, bytes.NewBuffer(reqBodyBytes.Bytes()))
+		producer := GetValueFromEnvVariable("PRODUCER_URL", "http://localhost:9090")
+		cproducerEndPoint := "/tasks/produce"
+		request, err := http.NewRequest("POST", producer+producerEndPoint, bytes.NewBuffer(reqBodyBytes.Bytes()))
 		if err != nil {
 			log.Fatal("Unable to POST task to Producer")
 		}
