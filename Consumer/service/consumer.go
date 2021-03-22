@@ -33,6 +33,7 @@ func (csc *ConsumerService) Initialize() {
 func (csc *ConsumerService) InitializeConsumer(_ http.ResponseWriter, _ *http.Request) {
 	log.Print("Consumer Started")
 	go csc.StartConsumer()
+	go csc.Collector.ConsumeTasks()
 }
 
 func (csc *ConsumerService) StartConsumer() {
