@@ -49,6 +49,25 @@ func (ctr *Collector) RequestCollector(_ http.ResponseWriter, req *http.Request)
 	return
 }
 
+// Function to capture the task-requests in buffered channels and produce to Consumer
+func (c *Collector) ConsumeTasks() {
+	ticker := time.NewTicker(5 * time.Second)
+	done := make(chan bool)
+
+	go func() {
+		for {
+			select {
+			case <- done:
+				fmt.Print("Came here")
+			case _= <-ticker.C:
+				fmt.Println("Go routine that runs once a day")
+				RequestColl()
+			}
+		}
+	}()
+	<-done
+}
+
 func extractRequestBody(req *http.Request) []byte {
 	body := ""
 	if req.Body != nil {
